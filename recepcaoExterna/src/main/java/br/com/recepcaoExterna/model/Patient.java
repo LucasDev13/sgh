@@ -67,6 +67,10 @@ public class Patient {
         return medicalRecord;
     }
 
+    public void setMedicalRecord(int medicalRecord) {
+        this.medicalRecord = medicalRecord;
+    }
+
     public String getFullName() {
         return fullName;
     }

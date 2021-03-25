@@ -3,6 +3,7 @@ package br.com.recepcaoExterna.service;
 import br.com.recepcaoExterna.dto.PatientDTO;
 import br.com.recepcaoExterna.model.Patient;
 import br.com.recepcaoExterna.repository.PatientRepository;
+import br.com.recepcaoExterna.util.CreatedMedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ public class PatientService {
     public PatientDTO insert(PatientDTO patientDTO){
         Patient patient = new Patient();
         convertEntityToDto(patient,patientDTO);
+        patient.setMedicalRecord(CreatedMedicalRecord.buildsMedicalRecord());
         patient = patientRepository.save(patient);
         return new PatientDTO(patient);
     }
