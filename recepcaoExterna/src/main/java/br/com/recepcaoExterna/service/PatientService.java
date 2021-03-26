@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PatientService {
 
@@ -21,6 +24,12 @@ public class PatientService {
         patient.setMedicalRecord(CreatedMedicalRecord.buildsMedicalRecord());
         patient = patientRepository.save(patient);
         return new PatientDTO(patient);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PatientDTO> findAll(){
+        List<Patient> list = patientRepository.findAll();
+        return list.stream().map(x -> new PatientDTO(x)).collect(Collectors.toList());
     }
 
     public void convertEntityToDto(Patient entity, PatientDTO dto){
