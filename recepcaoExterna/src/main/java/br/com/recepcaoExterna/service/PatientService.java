@@ -3,9 +3,12 @@ package br.com.recepcaoExterna.service;
 import br.com.recepcaoExterna.dto.PatientDTO;
 import br.com.recepcaoExterna.model.Patient;
 import br.com.recepcaoExterna.repository.PatientRepository;
+import br.com.recepcaoExterna.service.exception.DatabaseException;
 import br.com.recepcaoExterna.service.exception.ResourceNotFoundException;
 import br.com.recepcaoExterna.util.CreatedMedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +46,16 @@ public class PatientService {
             return new PatientDTO(patient);
         }catch(EntityNotFoundException e){
             throw new ResourceNotFoundException("Id not found " + id);
+        }
+    }
+
+    public void delete(Long id){
+        try{
+            patientRepository.deleteById(id);
+        }catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException("Id not found " + id);
+        }catch(DataIntegrityViolationException e){
+            throw new DatabaseException("Integrity violation");
         }
     }
 

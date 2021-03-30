@@ -5,6 +5,7 @@ import br.com.recepcaoExterna.model.Patient;
 import br.com.recepcaoExterna.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,12 @@ public class PatientResource {
     public ResponseEntity<PatientDTO> update(@PathVariable Long id, @RequestBody PatientDTO patientDTO){
         patientDTO = patientService.update(id, patientDTO);
         return ResponseEntity.ok().body(patientDTO);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<PatientDTO> delete(@PathVariable Long id){
+        patientService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 
