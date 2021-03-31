@@ -3,6 +3,7 @@ package br.com.recepcaoExterna.dto;
 import br.com.recepcaoExterna.model.Address;
 import br.com.recepcaoExterna.model.Patient;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class PatientDTO {
@@ -20,6 +21,7 @@ public class PatientDTO {
     private String rg;
     private String telephone;
     private String email;
+    private LocalDateTime dataHoraCadastro = LocalDateTime.now();
     private Address address;
 
     public PatientDTO() {
@@ -59,7 +61,9 @@ public class PatientDTO {
         this.rg = patient.getRg();
         this.telephone = patient.getTelephone();
         this.email = patient.getEmail();
+        this.dataHoraCadastro = patient.getDataHoraCadastro();
         this.address = patient.getAddress();
+
     }
 
     public Long getId() {
@@ -160,6 +164,10 @@ public class PatientDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalDateTime getDataHoraCadastro() {
+        return dataHoraCadastro;
     }
 
     public Address getAddress() {

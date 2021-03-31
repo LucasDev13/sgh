@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +29,7 @@ public class Patient {
     private String rg;
     private String telephone;
     private String email;
+    private LocalDateTime dataHoraCadastro;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
@@ -38,7 +40,7 @@ public class Patient {
     public Patient(Long id, int medicalRecord, String fullName, String birthDate,
                    int age, String motherName, String fatherName,
                    String genre, String cpf, String nationalHealthCard,
-                   String rg, String telephone, String email, Address address) {
+                   String rg, String telephone, String email, LocalDateTime dataHoraCadastro, Address address) {
         this.id = id;
         this.medicalRecord = medicalRecord;
         this.fullName = fullName;
@@ -52,6 +54,7 @@ public class Patient {
         this.rg = rg;
         this.telephone = telephone;
         this.email = email;
+        this.dataHoraCadastro = dataHoraCadastro;
         this.address = address;
     }
 
@@ -157,6 +160,14 @@ public class Patient {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalDateTime getDataHoraCadastro() {
+        return dataHoraCadastro;
+    }
+
+    public void setDataHoraCadastro(LocalDateTime dataHoraCadastro) {
+        this.dataHoraCadastro = dataHoraCadastro;
     }
 
     public Address getAddress() {

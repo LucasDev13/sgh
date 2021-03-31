@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +22,7 @@ public class Address {
     private String district;
     private String city;
     private String uf;
+    private final LocalDateTime dataHoraCadastro = LocalDateTime.now();
 
     public Address() {
     }
@@ -100,6 +102,10 @@ public class Address {
 
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    public LocalDateTime getDataHoraCadastro() {
+        return dataHoraCadastro;
     }
 
     @Override

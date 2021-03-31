@@ -71,6 +71,7 @@ public class PatientService {
         entity.setRg(dto.getRg());
         entity.setTelephone(dto.getTelephone());
         entity.setEmail(dto.getEmail());
+        entity.setDataHoraCadastro(dto.getDataHoraCadastro());
         entity.setAddress(dto.getAddress());
     }
 }
