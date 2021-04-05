@@ -31,11 +31,12 @@ public class AttendanceDTO {
     public AttendanceDTO() {
     }
 
-    public AttendanceDTO(Long id, Patient patient, HealthInsurance healthInsurance,
+    public AttendanceDTO(Long id, int attendanceRecord, Patient patient, HealthInsurance healthInsurance,
                       String requestCharacter, Clinic clinic, LocalDateTime dateTimeAttendance,
                       ProcedureClinic procedureClinic, Professional doctor,
                       CostCenter cdc, Origin origin) {
         this.id = id;
+        this.attendanceRecord = attendanceRecord;
         this.patient = patient;
         this.healthInsurance = healthInsurance;
         this.requestCharacter = requestCharacter;
@@ -49,6 +50,7 @@ public class AttendanceDTO {
 
     public AttendanceDTO(Attendance attendance){
         this.id = attendance.getId();
+        this.attendanceRecord = attendance.getAttendanceRecord();
         this.patient = attendance.getPatient();
         this.healthInsurance = attendance.getHealthInsurance();
         this.requestCharacter = attendance.getRequestCharacter();
@@ -146,6 +148,22 @@ public class AttendanceDTO {
 
     public void setOrigin(Origin origin) {
         this.origin = origin;
+    }
+
+    public static AttendanceDTO convert(Attendance attendance){
+        //get no dto e set na entity
+        AttendanceDTO attendanceDTO = new AttendanceDTO();
+        attendanceDTO.setAttendanceRecord(attendance.getAttendanceRecord());
+        attendanceDTO.setPatient(attendance.getPatient());
+        attendanceDTO.setHealthInsurance(attendance.getHealthInsurance());
+        attendanceDTO.setRequestCharacter(attendance.getRequestCharacter());
+        attendanceDTO.setClinic(attendance.getClinic());
+        attendanceDTO.setDateTimeAttendance(attendance.getDateTimeAttendance());
+        attendanceDTO.setProcedureClinic(attendance.getProcedureClinic());
+        attendanceDTO.setDoctor(attendance.getDoctor());
+        attendanceDTO.setCdc(attendance.getCdc());
+        attendanceDTO.setOrigin(attendance.getOrigin());
+        return attendanceDTO;
     }
 
 }

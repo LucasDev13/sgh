@@ -1,5 +1,7 @@
 package br.com.recepcaoExterna.model;
 
+import br.com.recepcaoExterna.dto.PatientDTO;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -189,5 +191,23 @@ public class Patient {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public static Patient convert(PatientDTO dto){
+        Patient patient = new Patient();
+        patient.setFullName(dto.getFullName());
+        patient.setBirthDate(dto.getBirthDate());
+        patient.setAge(dto.getAge());
+        patient.setMotherName(dto.getMotherName());
+        patient.setFatherName(dto.getFatherName());
+        patient.setGenre(dto.getGenre());
+        patient.setCpf(dto.getCpf());
+        patient.setNationalHealthCard(dto.getNationalHealthCard());
+        patient.setRg(dto.getRg());
+        patient.setTelephone(dto.getTelephone());
+        patient.setEmail(dto.getEmail());
+        patient.setDataHoraCadastro(dto.getDataHoraCadastro());
+        patient.setAddress(dto.getAddress());
+        return patient;
     }
 }

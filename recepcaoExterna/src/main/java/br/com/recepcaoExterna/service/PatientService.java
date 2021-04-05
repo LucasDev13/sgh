@@ -1,5 +1,6 @@
 package br.com.recepcaoExterna.service;
 
+import antlr.debug.ParserTokenAdapter;
 import br.com.recepcaoExterna.dto.PatientDTO;
 import br.com.recepcaoExterna.model.Patient;
 import br.com.recepcaoExterna.repository.PatientRepository;
@@ -24,11 +25,9 @@ public class PatientService {
 
     @Transactional
     public PatientDTO insert(PatientDTO patientDTO){
-        Patient patient = new Patient();
-        convertEntityToDto(patient,patientDTO);
-        patient.setMedicalRecord(CreatedMedicalRecord.buildsMedicalRecord());
-        patient = patientRepository.save(patient);
-        return new PatientDTO(patient);
+        patientDTO.setMedicalRecord(CreatedMedicalRecord.buildsMedicalRecord());
+        Patient patient = patientRepository.save(Patient.convert(patientDTO));
+        return patientDTO.convert(patient);
     }
 
     @Transactional(readOnly = true)
@@ -41,7 +40,7 @@ public class PatientService {
     public PatientDTO update(Long id, PatientDTO patientDTO){
         try {
             Patient patient = patientRepository.getOne(id);
-            convertEntityToDto(patient, patientDTO);
+            //convertEntityToDto(patient, patientDTO);
             patient = patientRepository.save(patient);
             return new PatientDTO(patient);
         }catch(EntityNotFoundException e){
@@ -59,19 +58,4 @@ public class PatientService {
         }
     }
 
-    public void convertEntityToDto(Patient entity, PatientDTO dto){
-        entity.setFullName(dto.getFullName());
-        entity.setBirthDate(dto.getBirthDate());
-        entity.setAge(dto.getAge());
-        entity.setMotherName(dto.getMotherName());
-        entity.setFatherName(dto.getFatherName());
-        entity.setGenre(dto.getGenre());
-        entity.setCpf(dto.getCpf());
-        entity.setNationalHealthCard(dto.getNationalHealthCard());
-        entity.setRg(dto.getRg());
-        entity.setTelephone(dto.getTelephone());
-        entity.setEmail(dto.getEmail());
-        entity.setDataHoraCadastro(dto.getDataHoraCadastro());
-        entity.setAddress(dto.getAddress());
-    }
 }

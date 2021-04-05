@@ -1,5 +1,7 @@
 package br.com.recepcaoExterna.model;
 
+import br.com.recepcaoExterna.dto.AttendanceDTO;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,7 @@ import java.util.Objects;
 public class Attendance {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int attendanceRecord;
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -154,5 +156,21 @@ public class Attendance {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public static Attendance convert(AttendanceDTO dto){
+        //get no dto e set na entity
+        Attendance attendance = new Attendance();
+        attendance.setAttendanceRecord(dto.getAttendanceRecord());
+        attendance.setPatient(dto.getPatient());
+        attendance.setHealthInsurance(dto.getHealthInsurance());
+        attendance.setRequestCharacter(dto.getRequestCharacter());
+        attendance.setClinic(dto.getClinic());
+        attendance.setDateTimeAttendance(dto.getDateTimeAttendance());
+        attendance.setProcedureClinic(dto.getProcedureClinic());
+        attendance.setDoctor(dto.getDoctor());
+        attendance.setCdc(dto.getCdc());
+        attendance.setOrigin(dto.getOrigin());
+        return attendance;
     }
 }

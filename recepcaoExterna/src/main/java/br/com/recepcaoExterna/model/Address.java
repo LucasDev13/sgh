@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cep;
     private String publicPlace;//logradouro

@@ -1,5 +1,7 @@
 package br.com.recepcaoExterna.dto;
 
+import br.com.recepcaoExterna.model.Patient;
+
 public class PatientNameDTO {
 
     private String fullName;
@@ -9,6 +11,10 @@ public class PatientNameDTO {
 
     public PatientNameDTO(String fullName) {
         this.fullName = fullName;
+    }
+
+    public PatientNameDTO(Patient patient){
+        this.fullName = patient.getFullName();
     }
 
     public String getFullName() {

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class ProcedureClinic {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nameProcedureClinic;
 

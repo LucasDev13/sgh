@@ -78,6 +78,10 @@ public class PatientDTO {
         return medicalRecord;
     }
 
+    public void setMedicalRecord(int medicalRecord) {
+        this.medicalRecord = medicalRecord;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -189,5 +193,23 @@ public class PatientDTO {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public static PatientDTO convert(Patient patient){
+        PatientDTO patientDTO = new PatientDTO();
+        patientDTO.setFullName(patient.getFullName());
+        patientDTO.setBirthDate(patient.getBirthDate());
+        patientDTO.setAge(patient.getAge());
+        patientDTO.setMotherName(patient.getMotherName());
+        patientDTO.setFatherName(patient.getFatherName());
+        patientDTO.setGenre(patient.getGenre());
+        patientDTO.setCpf(patient.getCpf());
+        patientDTO.setNationalHealthCard(patient.getNationalHealthCard());
+        patientDTO.setRg(patient.getRg());
+        patientDTO.setTelephone(patient.getTelephone());
+        patientDTO.setEmail(patient.getEmail());
+        //patientDTO.setDataHoraCadastro(patient.getDataHoraCadastro());
+        patientDTO.setAddress(patient.getAddress());
+        return patientDTO;
     }
 }

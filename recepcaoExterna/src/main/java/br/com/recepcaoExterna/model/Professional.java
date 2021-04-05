@@ -11,17 +11,17 @@ import javax.persistence.Table;
 public class Professional {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nameProfessinal;
+    private String fullName;
     private String crm;
 
     public Professional() {
     }
 
-    public Professional(Long id, String nameProfessinal, String crm) {
+    public Professional(Long id, String fullName, String crm) {
         this.id = id;
-        this.nameProfessinal = nameProfessinal;
+        this.fullName = fullName;
         this.crm = crm;
     }
 
@@ -33,12 +33,12 @@ public class Professional {
         this.id = id;
     }
 
-    public String getNameProfessinal() {
-        return nameProfessinal;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setNameProfessinal(String nameProfessinal) {
-        this.nameProfessinal = nameProfessinal;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getCrm() {
