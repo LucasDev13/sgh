@@ -19,9 +19,6 @@ import java.util.stream.Collectors;
 public class AttendanceService {
 
     @Autowired
-    private PatientRepository patientRepository;
-
-    @Autowired
     private AttendanceRepository repository;
 
     public AttendanceDTO insert (AttendanceDTO attendanceDTO){
@@ -35,11 +32,6 @@ public class AttendanceService {
     public List<AttendanceDTO> findAll(){
         List<Attendance> list = repository.findAll();
         return list.stream().map(AttendanceDTO::convert).collect(Collectors.toList());
-    }
-
-    public List<PatientDTO> queryByName(String name){
-        List<Patient> patients = patientRepository.queryByFullNameLike(name);
-        return patients.stream().map(PatientDTO::convert).collect(Collectors.toList());
     }
 
 }

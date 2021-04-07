@@ -27,7 +27,7 @@ public class PatientService {
     public PatientDTO insert(PatientDTO patientDTO){
         patientDTO.setMedicalRecord(CreatedMedicalRecord.buildsMedicalRecord());
         Patient patient = patientRepository.save(Patient.convert(patientDTO));
-        return patientDTO.convert(patient);
+        return PatientDTO.convert(patient);
     }
 
     @Transactional(readOnly = true)
@@ -56,6 +56,11 @@ public class PatientService {
         }catch(DataIntegrityViolationException e){
             throw new DatabaseException("Integrity violation");
         }
+    }
+
+    public List<PatientDTO> queryByName(String firstName){
+        List<Patient> patients = patientRepository.queryByFirstNameLike(firstName);
+        return patients.stream().map(PatientDTO::convert).collect(Collectors.toList());
     }
 
 }

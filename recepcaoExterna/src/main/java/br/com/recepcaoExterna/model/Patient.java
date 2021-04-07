@@ -1,6 +1,7 @@
 package br.com.recepcaoExterna.model;
 
 import br.com.recepcaoExterna.dto.PatientDTO;
+import com.sun.source.doctree.SerialDataTree;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,18 +10,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_patient")
-public class Patient {
-
+public class Patient implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int medicalRecord;
-    private String fullName;
+    private String firstName;
     private String birthDate;
     private int age;
     private String motherName;
@@ -31,7 +33,7 @@ public class Patient {
     private String rg;
     private String telephone;
     private String email;
-    private LocalDateTime dataHoraCadastro;
+    private LocalDateTime dataHoraCadastro = LocalDateTime.now();
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
@@ -39,13 +41,13 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Long id, int medicalRecord, String fullName, String birthDate,
+    public Patient(Long id, int medicalRecord, String firstName, String birthDate,
                    int age, String motherName, String fatherName,
                    String genre, String cpf, String nationalHealthCard,
                    String rg, String telephone, String email, LocalDateTime dataHoraCadastro, Address address) {
         this.id = id;
         this.medicalRecord = medicalRecord;
-        this.fullName = fullName;
+        this.firstName = firstName;
         this.birthDate = birthDate;
         this.age = age;
         this.motherName = motherName;
@@ -76,12 +78,12 @@ public class Patient {
         this.medicalRecord = medicalRecord;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getBirthDate() {
@@ -195,7 +197,8 @@ public class Patient {
 
     public static Patient convert(PatientDTO dto){
         Patient patient = new Patient();
-        patient.setFullName(dto.getFullName());
+        patient.setId(dto.getId());
+        patient.setFirstName(dto.getFirstName());
         patient.setBirthDate(dto.getBirthDate());
         patient.setAge(dto.getAge());
         patient.setMotherName(dto.getMotherName());

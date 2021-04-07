@@ -14,7 +14,7 @@ public class PatientNameDTO {
     }
 
     public PatientNameDTO(Patient patient){
-        this.fullName = patient.getFullName();
+        this.fullName = patient.getFirstName();
     }
 
     public String getFullName() {

@@ -10,7 +10,7 @@ public class PatientDTO {
 
     private Long id;
     private int medicalRecord;
-    private String fullName;
+    private String firstName;
     private String birthDate;
     private int age;
     private String motherName;
@@ -21,19 +21,19 @@ public class PatientDTO {
     private String rg;
     private String telephone;
     private String email;
-    private LocalDateTime dataHoraCadastro = LocalDateTime.now();
+    private LocalDateTime dataHoraCadastro;
     private Address address;
 
     public PatientDTO() {
     }
 
-    public PatientDTO(Long id, int medicalRecord, String fullName, String birthDate,
+    public PatientDTO(Long id, int medicalRecord, String firstName, String birthDate,
                    int age, String motherName, String fatherName,
                    String genre, String cpf, String nationalHealthCard,
                    String rg, String telephone, String email, Address address) {
         this.id = id;
         this.medicalRecord = medicalRecord;
-        this.fullName = fullName;
+        this.firstName = firstName;
         this.birthDate = birthDate;
         this.age = age;
         this.motherName = motherName;
@@ -50,7 +50,7 @@ public class PatientDTO {
     public PatientDTO(Patient patient) {
         this.id = patient.getId();
         this.medicalRecord = patient.getMedicalRecord();
-        this.fullName = patient.getFullName();
+        this.firstName = patient.getFirstName();
         this.birthDate = patient.getBirthDate();
         this.age = patient.getAge();
         this.motherName = patient.getMotherName();
@@ -82,12 +82,12 @@ public class PatientDTO {
         this.medicalRecord = medicalRecord;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getBirthDate() {
@@ -174,6 +174,10 @@ public class PatientDTO {
         return dataHoraCadastro;
     }
 
+    public void setDataHoraCadastro(LocalDateTime dataHoraCadastro) {
+        this.dataHoraCadastro = dataHoraCadastro;
+    }
+
     public Address getAddress() {
         return address;
     }
@@ -197,7 +201,8 @@ public class PatientDTO {
 
     public static PatientDTO convert(Patient patient){
         PatientDTO patientDTO = new PatientDTO();
-        patientDTO.setFullName(patient.getFullName());
+        patientDTO.setId(patient.getId());
+        patientDTO.setFirstName(patient.getFirstName());
         patientDTO.setBirthDate(patient.getBirthDate());
         patientDTO.setAge(patient.getAge());
         patientDTO.setMotherName(patient.getMotherName());
@@ -208,7 +213,7 @@ public class PatientDTO {
         patientDTO.setRg(patient.getRg());
         patientDTO.setTelephone(patient.getTelephone());
         patientDTO.setEmail(patient.getEmail());
-        //patientDTO.setDataHoraCadastro(patient.getDataHoraCadastro());
+        patientDTO.setDataHoraCadastro(patient.getDataHoraCadastro());
         patientDTO.setAddress(patient.getAddress());
         return patientDTO;
     }

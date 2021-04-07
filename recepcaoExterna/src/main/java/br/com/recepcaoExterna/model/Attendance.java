@@ -161,6 +161,7 @@ public class Attendance {
     public static Attendance convert(AttendanceDTO dto){
         //get no dto e set na entity
         Attendance attendance = new Attendance();
+        attendance.setId(dto.getId());
         attendance.setAttendanceRecord(dto.getAttendanceRecord());
         attendance.setPatient(dto.getPatient());
         attendance.setHealthInsurance(dto.getHealthInsurance());
