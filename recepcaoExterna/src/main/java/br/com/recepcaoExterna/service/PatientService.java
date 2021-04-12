@@ -59,7 +59,7 @@ public class PatientService {
     }
 
     public List<PatientDTO> queryByName(String firstName){
-        List<Patient> patients = patientRepository.queryByFirstNameLike(firstName);
+        List<Patient> patients = patientRepository.findByPatientLike(firstName);
         return patients.stream().map(PatientDTO::convert).collect(Collectors.toList());
     }
 

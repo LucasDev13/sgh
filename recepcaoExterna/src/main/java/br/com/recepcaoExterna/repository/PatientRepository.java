@@ -10,5 +10,5 @@ import java.util.List;
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     Patient findBycpf(String cpf);
-    List<Patient> queryByFirstNameLike(String firstName);//a query precisa ter o mesmo nome do atributo da entidade.
+    List<Patient> findByPatientLike(String firstName);//a query precisa ter o mesmo nome do atributo da entidade.
 }
