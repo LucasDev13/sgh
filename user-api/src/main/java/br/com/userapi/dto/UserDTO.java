@@ -1,5 +1,7 @@
 package br.com.userapi.dto;
 
+import br.com.userapi.model.User;
+
 import java.util.Date;
 
 public class UserDTO {
@@ -68,5 +70,16 @@ public class UserDTO {
 
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public static UserDTO convert(User user){
+        UserDTO userDTO = new UserDTO();
+        userDTO.setNome(user.getNome());
+        userDTO.setCpf(user.getCpf());
+        userDTO.setEndereco(user.getEndereco());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setTelefone(user.getTelefone());
+        userDTO.setDataCadastro(user.getDataCadastro());
+        return userDTO;
     }
 }
